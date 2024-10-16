@@ -15,7 +15,8 @@ nav{
 }
 
 .container{  
-    margin-top: 5%;     
+    margin-top: 5%;  
+    margin-bottom: 10vh;   
 }
 
 .bsu-logo{
@@ -33,17 +34,22 @@ nav{
     background-color: rgb(137, 136, 136);
 }
 
+
 .section2{
-    margin-top: 100px;
     padding-top: 30px;
     background-color: #151924;
     font-family: 'Times New Roman';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
 }
 
+
 .container2{
-    height: 350px; /* or any fixed height */
-    overflow: hidden; /* hides any overflow content */
-    position: relative; /* makes sure child divs stay within the container */
+    height: 100vh;
+    overflow: hidden;
+    position: relative; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +57,10 @@ nav{
 
 .monitor1{
     margin: 5px 50px 5px 50px;
-    height: 350px;
-    width: 150vh;
+    padding-bottom: 10px;
+}
+
+canvas{
+    width: 100%;
+    height: 100%;
 }
