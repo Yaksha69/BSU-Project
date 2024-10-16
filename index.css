@@ -84,6 +84,10 @@ nav{
 
 
 @media (max-width: 768px) {
+  .navbar-brand{
+    font-size: 2.6vh;
+    font-weight: bold;
+}
     #myChart {
         width: 100%; 
         height: 300px;
@@ -107,7 +111,7 @@ nav{
       .monitor1{
         margin: 5px 50px 5px 50px;
         padding-bottom: 10px;
-        width: 350px;
+        width: 80vw;
         margin-left: 10px;
     }
     
