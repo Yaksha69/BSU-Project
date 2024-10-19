@@ -24,25 +24,25 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
                         <span>Voltage</span>
-                        <p>213216</p>
+                        <p id="voltage">Loading...</p>
                     </div>
                     <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
-                        <span>Voltage</span>
-                        <p>123213</p>
+                        <span>Current</span>
+                        <p id="current">Loading...</p>
                     </div>
                     <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
-                        <span>Voltage</span>
-                        <p>342323</p>
+                        <span>Power</span>
+                        <p id="power">Loading...</p>
                     </div>
                     <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
-                        <span>Voltage</span>
-                        <p>899878</p>
+                        <span>Energy</span>
+                        <p id="energy">Loading...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class=" text-light pb-5">
+        <section class="text-light pb-5">
             <h1 class="ms-4">Voltage</h1>
             <div class="section2 container-fluid">
                 <div class="cont22 container-fluid pb-5">
@@ -50,8 +50,7 @@
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
-            </div> 
-
+            </div>
 
             <h1 class="ms-4">Current</h1>
             <div class="section2 container-fluid">
@@ -60,8 +59,8 @@
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
-            </div> 
-
+            </div>
+            
 
             <h1 class="ms-4">Power</h1>
             <div class="section2 container-fluid">
@@ -70,7 +69,8 @@
                         <canvas id="myChart3"></canvas>
                     </div>
                 </div>
-            </div> 
+            </div>
+            
 
             <h1 class="ms-4">Energy</h1>
             <div class="section2 container-fluid">
@@ -79,19 +79,23 @@
                         <canvas id="myChart4"></canvas>
                     </div>
                 </div>
-            </div> 
+            </div>
+            
         </section>
     </main>
 
-    <footer>
-        
-    </footer>
+    <footer></footer>
 
+    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="java-script/chart1.js"></script>
-    <script src="java-script/chart2.js"></script>
-    <script src="java-script/chart3.js"></script>
-    <script src="java-script/chart4.js"></script>
+    <script src="java-script/index.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="java-script/index.js"></script> <!-- Script for dynamic data fetching -->
+    <script src="java-script/chart1.js"></script> <!-- For Voltage chart -->
+    <script src="java-script/chart2.js"></script> <!-- For Current chart -->
+    <script src="java-script/chart3.js"></script> <!-- For Power chart -->
+    <script src="java-script/chart4.js"></script> <!-- For Energy chart -->
 </body>
 </html>
