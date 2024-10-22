@@ -1,0 +1,25 @@
+.main-body{
+    background-color: #ed192a;
+    height: 100vh;
+}
+.img-logo{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+}
+.main{
+    background-color: #1F1D38;
+    color: #ffff;
+    border-radius: 20px;
+}
+.card{
+    border: none;
+    
+}
+.fw-bold{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ 
