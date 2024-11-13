@@ -1,65 +1,62 @@
 const Energy = document.getElementById('myChart4');
 let myChart4;
 
-// Function to fetch energy data from the API
+// Function to fetch data from the API
 async function fetchEnergyData() {
     try {
-        const response = await fetch('http://localhost:7000/api/v1/data/all'); // Adjust your endpoint
+        const response = await fetch('http://localhost:7000/api/v1/data/all');
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response.statusText);
         }
         const data = await response.json();
-        console.log('Fetched energy data:', data); // Log the fetched data
+        console.log('Fetched energy data:', data); 
 
-        // Extract the energy data and corresponding timestamps
-        const energyData = data.map(entry => entry.energy); // Extract energy values
-        const timeData = data.map(entry => new Date(entry.createdAt).toLocaleTimeString()); // Extract and format timestamps
+        const energyData = data.map(entry => entry.energy); 
+        const timeData = data.map(entry => new Date(entry.createdAt).toLocaleTimeString()); 
 
-        // Limit to the last 5 data points
-        const limitedEnergyData = energyData.slice(-20);
-        const limitedTimeData = timeData.slice(-20);
+        // Limit to the last 10 data points
+        const limitedEnergyData = energyData.slice(-10);
+        const limitedTimeData = timeData.slice(-10);
 
-        // Create the chart using fetched data
         createChart4(limitedTimeData, limitedEnergyData);
     } catch (error) {
         console.error('Error fetching energy data:', error);
     }
 }
 
-// Function to create the chart
+// Function to create or update the chart
 function createChart4(timeData, energyData) {
     if (myChart4) {
-        myChart4.destroy(); // Destroy the existing chart instance if it exists
+        myChart4.destroy(); 
     }
 
     myChart4 = new Chart(Energy, {
         type: 'line',
         data: {
-            labels: timeData, // Use the fetched time data as labels
+            labels: timeData, 
             datasets: [{
-                label: 'Energy Data', // Update the label accordingly
-                data: energyData, // Use the fetched energy data here
+                label: 'Energy Data', 
+                data: energyData, 
                 borderWidth: 1,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Changed for better visibility
-                fill: true
+                borderColor: 'rgba(54, 162, 235, 1)', // Updated color if needed
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false, // Disable animations
             scales: {
                 x: {
                     title: {
                         display: true,
-                        text: 'Time' // Label for the x-axis
+                        text: 'Time' 
                     }
                 },
                 y: {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Energy (Wh)' // Label for the y-axis
+                        text: 'Energy (Wh)' // Y-axis label for Energy
                     }
                 }
             }
@@ -67,13 +64,36 @@ function createChart4(timeData, energyData) {
     });
 }
 
-// Fetch energy data and create the chart initially
+// Establish WebSocket connection
+const socket4 = new WebSocket('ws://localhost:7000/');
+
+socket4.onopen = () => {
+    console.log('WebSocket connection established for Chart 4.');
+};
+
+socket4.onmessage = (event) => {
+    const newData = JSON.parse(event.data);
+    console.log('Received new data for Chart 4:', newData);
+
+    // Fetch latest data to update the chart
+    fetchEnergyData(); // Re-fetch data to update the chart
+};
+
+socket4.onclose = () => {
+    console.log('WebSocket connection closed for Chart 4.');
+};
+
+socket4.onerror = (error) => {
+    console.error('WebSocket error for Chart 4:', error);
+};
+
+// Initial fetch to display the chart
 fetchEnergyData();
 
-// Redraw the chart on window resize to ensure proper scaling
+// Resize event listener to update chart on window resize
 window.addEventListener('resize', () => {
     if (myChart4) {
-        myChart4.destroy(); // Destroy the existing chart instance
-        fetchEnergyData(); // Fetch the data again
+        myChart4.destroy(); 
+        fetchEnergyData(); 
     }
 });

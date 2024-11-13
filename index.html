@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
     <header>
         <nav class="navbar navbar-expand-lg p-4">
             <div class="container-fluid">
@@ -22,27 +21,40 @@
         <section class="m-1">
             <div class="container container-fluid text-center text-light">
                 <div class="row d-flex justify-content-center">
-                    <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
+                    <div class="col col-5 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
                         <span>Voltage</span>
-                        <p id="voltage">Loading...</p>
+                        <ul class="list-inline">
+                            <li id="voltage" class="list-inline-item">.....</li>
+                            <li class="list-inline-item">V</li>
+                        </ul>
                     </div>
-                    <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
+                    <div class="col col-5 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
                         <span>Current</span>
-                        <p id="current">Loading...</p>
+                        <ul class="list-inline">
+                            <li id="current" class="list-inline-item">.....</li>
+                            <li class="list-inline-item">I</li>
+                        </ul>
                     </div>
-                    <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
+                    <div class="col col-5 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
                         <span>Power</span>
-                        <p id="power">Loading...</p>
+                        <ul class="list-inline">
+                            <li id="power" class="list-inline-item">.....</li>
+                            <li class="list-inline-item">W</li>
+                        </ul>
                     </div>
-                    <div class="col col-9 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
+                    <div class="col col-5 col-md-6 col-lg-2 border border-dark mx-lg-5 my-3 mx-1 p-5">
                         <span>Energy</span>
-                        <p id="energy">Loading...</p>
+
+                        <ul class="list-inline">
+                            <li id="energy" class="list-inline-item">.....</li>
+                            <li class="list-inline-item">K/H</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="text-light pb-5">
+        <section class=" text-light pb-5">
             <h1 class="ms-4">Voltage</h1>
             <div class="section2 container-fluid">
                 <div class="cont22 container-fluid pb-5">
@@ -50,7 +62,8 @@
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
-            </div>
+            </div> 
+
 
             <h1 class="ms-4">Current</h1>
             <div class="section2 container-fluid">
@@ -59,8 +72,8 @@
                         <canvas id="myChart2"></canvas>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
+
 
             <h1 class="ms-4">Power</h1>
             <div class="section2 container-fluid">
@@ -69,8 +82,7 @@
                         <canvas id="myChart3"></canvas>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
 
             <h1 class="ms-4">Energy</h1>
             <div class="section2 container-fluid">
@@ -79,23 +91,20 @@
                         <canvas id="myChart4"></canvas>
                     </div>
                 </div>
-            </div>
-            
+            </div> 
         </section>
     </main>
 
-    <footer></footer>
+    <footer>
+        
+    </footer>
 
-    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="java-script/index.js"></script>
-    
-    <!-- Custom Scripts -->
-    <script src="java-script/index.js"></script> <!-- Script for dynamic data fetching -->
-    <script src="java-script/chart1.js"></script> <!-- For Voltage chart -->
-    <script src="java-script/chart2.js"></script> <!-- For Current chart -->
-    <script src="java-script/chart3.js"></script> <!-- For Power chart -->
-    <script src="java-script/chart4.js"></script> <!-- For Energy chart -->
+    <script src="java-script/chart1.js"></script>
+    <script src="java-script/chart2.js"></script>
+    <script src="java-script/chart3.js"></script>
+    <script src="java-script/chart4.js"></script>
 </body>
 </html>

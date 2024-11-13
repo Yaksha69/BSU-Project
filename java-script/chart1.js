@@ -1,65 +1,62 @@
 const Voltage = document.getElementById('myChart');
 let myChart;
 
-// Function to fetch sensor data from the API
+
 async function fetchData() {
     try {
-        const response = await fetch('http://localhost:7000/api/v1/data/all'); // Adjust your endpoint
+        const response = await fetch('http://localhost:7000/api/v1/data/all');
         if (!response.ok) {
             throw new Error('Network response was not ok: ' + response.statusText);
         }
         const data = await response.json();
-        console.log('Fetched data:', data); // Log the fetched data
+        console.log('Fetched data:', data);
 
-        // Extract the voltage data and corresponding timestamps
-        const voltageData = data.map(entry => entry.voltage); // Extract voltage values
-        const timeData = data.map(entry => new Date(entry.createdAt).toLocaleTimeString()); // Extract and format timestamps
+        const voltageData = data.map(entry => entry.voltage);
+        const timeData = data.map(entry => new Date(entry.createdAt).toLocaleTimeString());
 
-        // Limit to the last 5 data points
-        const limitedVoltageData = voltageData.slice(-20);
-        const limitedTimeData = timeData.slice(-20);
 
-        // Create the chart using fetched data
+        const limitedVoltageData = voltageData.slice(-10);
+        const limitedTimeData = timeData.slice(-10);
+
         createChart(limitedTimeData, limitedVoltageData);
     } catch (error) {
         console.error('Error fetching sensor data:', error);
     }
 }
 
-// Function to create the chart
+// Function to create or update the chart
 function createChart(timeData, voltageData) {
     if (myChart) {
-        myChart.destroy(); // Destroy the existing chart instance if it exists
+        myChart.destroy(); 
     }
 
     myChart = new Chart(Voltage, {
         type: 'line',
         data: {
-            labels: timeData, // Use the fetched time data as labels
+            labels: timeData,
             datasets: [{
-                label: 'Voltage Data', // Update the label accordingly
-                data: voltageData, // Use the fetched voltage data here
+                label: 'Voltage Data',
+                data: voltageData,
                 borderWidth: 1,
                 borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Changed for better visibility
-                fill: true
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false,
             scales: {
                 x: {
                     title: {
                         display: true,
-                        text: 'Time' // Label for the x-axis
+                        text: 'Time' 
                     }
                 },
                 y: {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Voltage (V)' // Label for the y-axis
+                        text: 'Voltage (V)' 
                     }
                 }
             }
@@ -67,13 +64,36 @@ function createChart(timeData, voltageData) {
     });
 }
 
-// Fetch data and create the chart initially
+// Establish WebSocket connection
+const socket = new WebSocket('ws://localhost:7000/');
+
+socket.onopen = () => {
+    console.log('WebSocket connection established.');
+};
+
+socket.onmessage = (event) => {
+    const newData = JSON.parse(event.data);
+    console.log('Received new data:', newData);
+
+    // Fetch latest data to update the chart
+    fetchData(); // Re-fetch data to update the chart
+};
+
+socket.onclose = () => {
+    console.log('WebSocket connection closed.');
+};
+
+socket.onerror = (error) => {
+    console.error('WebSocket error:', error);
+};
+
+// Initial fetch to display the chart
 fetchData();
 
-// Redraw the chart on window resize to ensure proper scaling
+// Resize event listener to update chart on window resize
 window.addEventListener('resize', () => {
     if (myChart) {
-        myChart.destroy(); // Destroy the existing chart instance
-        fetchData(); // Fetch the data again
+        myChart.destroy(); 
+        fetchData(); 
     }
 });
